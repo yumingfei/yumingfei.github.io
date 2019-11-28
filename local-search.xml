@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>KVM使用hugepage大页内存</title>
+    <link href="undefinedlinux-kvm-how-to-set-hugepages-in-kvm/"/>
+    <url>linux-kvm-how-to-set-hugepages-in-kvm/</url>
+    
+    <content type="html"><![CDATA[<h3 id="一、操作系统设置hugepages"><a href="#一、操作系统设置hugepages" class="headerlink" title="一、操作系统设置hugepages"></a>一、操作系统设置hugepages</h3><p>Linux操作系统中需要配置启用hugepage。</p><p>1.挂载hugetlbfs文件系统</p><pre><code># mkdir /dev/hugepages# mount -t hugetlbfs hugetlbfs /dev/hugepages</code></pre><p>2.设置内核参数预留内存</p><pre><code># echo 1024 &gt; /proc/sys/vm/nr_hugepages或者通过sysctl设置：vm.nr_hugepages=1024</code></pre><p>预留得越多，执行以上命令花的时间就越长。</p><p>3.查看内存使用情况</p><pre><code># cat /proc/meminfo | grep HugeHugePages_Total:    1024HugePages_Free:     1024HugePages_Rsvd:        0HugePages_Surp:        0Hugepagesize:       2048 kBHugePages_Total: Hugepage的页面数量HugePages_Free: 剩余的页面数量HugePages_Rsvd: 被分配预留但是还没有使用的page数目HugePages_Surp：HugePages_Total减去/proc/sys/vm/nr_hugepages中的值Hugepagesize: 每单位数量大小，为2048或者10240</code></pre><p>使用Hugepages的内存页是不会被交换出去到磁盘的，永远常驻在内存中，所以也减少了内存页交换的额外开销。使用hugepage的内存不能被其他的进程使用，所以，一定要合理设置这个值，避免造成浪费。使用超过8G物理内存的系统，就可以考虑使用HugePage。</p><p> HugePages_Free - HugePages_Rsvd部分的内存是浪费的，且不能被其他程序使用。在实际应用中，尽可能让HugePages_Free - HugePages_Rsvd=0</p><h3 id="KVM虚拟机配置hugepages"><a href="#KVM虚拟机配置hugepages" class="headerlink" title="KVM虚拟机配置hugepages"></a>KVM虚拟机配置hugepages</h3><p>方法一：直接启动qemu添加-mem-path参数</p><pre><code>qemu-system-x86_64 -m 2048 -hda /mnt/rhel6.img -mem-path /dev/hugepages</code></pre><p>方法二：通过libvirt给虚拟机的domain字段添加配置配置</p><pre><code>&lt;memoryBacking&gt;&lt;hugepages/&gt;&lt;/memoryBacking&gt;</code></pre><p>libvirt启动虚拟机可能存在以下问题：</p><ol><li>启动虚拟机时无权限访问大页内存的目录<ul><li>问题原因：libvirt用来启动qemu进程的用户没有权限访问挂载的大页内存目录</li><li>解决办法：修改/etc/libvirt/qemu.conf，把user和group都改成root</li></ul></li></ol><p>参考：</p><p><a href="https://libvirt.org/formatdomain.html#elementsMemoryBacking" target="_blank" rel="noopener">https://libvirt.org/formatdomain.html#elementsMemoryBacking</a><br><a href="https://www.mjmwired.net/kernel/Documentation/vm/hugetlbpage.txt" target="_blank" rel="noopener">https://www.mjmwired.net/kernel/Documentation/vm/hugetlbpage.txt</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+      <category>kvm</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+      <tag>kvm</tag>
+      
+      <tag>hugepage</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="undefinedhello-world/"/>
+    <url>hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

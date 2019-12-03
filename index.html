@@ -140,6 +140,63 @@
     
     
     <div class="col-12 col-md-8 m-auto">
+      <a href="/windows-system-operations-win7-change-inputmethod-hotkeys/">
+        <p class="h4 index-header">Win7上修改输入法的部分快捷键</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">系统上输入法会设置一些热键，例如：
+
+输入法切换；
+全半角切换；
+中英文标点符号切换；
+
+但修改这些快捷键时可能出现无法修改的情况（貌似win7才存在）。比如虽然设置成功但是重启系统又自动恢复成原来的快捷键。遇到这种情况可以通过修改注册表解决。
+Step 1打开注册表，定位到
+HKEY_CURRENT_USER\Control Panel\Input Method\Hot Keys
+其中00000010为输入法开关；00000011为全角半角切换；00000012为中英文标点切换。
+Step 2修改Key Modifiers项：
+
+第一位：01表示Alt，02表示Ctrl，04表示Shift
+第二位：80表示左侧，40表示右侧，组合起来为c0表示左侧的按键都可以生效
+
+Step 3注销或重启系统生效。
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-03&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/windows">windows</a>&nbsp;
+          
+            <a href="/categories/system">system</a>&nbsp;
+          
+            <a href="/categories/operations">operations</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/windows">windows</a>&nbsp;
+          
+            <a href="/tags/hotkeys">hotkeys</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
       <a href="/linux-kvm-how-to-set-hugepages-in-kvm/">
         <p class="h4 index-header">KVM使用hugepage大页内存</p>
         

@@ -15,7 +15,7 @@
   <meta name="description" content="努力探索这世界的一点一滴">
   <meta name="author" content="Fergus Yu">
   <meta name="keywords" content="Share Explore Things">
-  <title>标签 ~ 小飞象</title>
+  <title>Win7上修改输入法的部分快捷键 ~ 小飞象</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -102,7 +102,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/banner.png')no-repeat center center;
+         style="background: url('/img/banner.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -112,6 +112,41 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期二, 十二月 3日 2019, 1:52 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    206 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      1 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -123,22 +158,91 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/hotkeys/" style="font-size: 15px; color: #bbe">hotkeys</a> <a href="/tags/hugepage/" style="font-size: 15px; color: #bbe">hugepage</a> <a href="/tags/kvm/" style="font-size: 15px; color: #bbe">kvm</a> <a href="/tags/linux/" style="font-size: 15px; color: #bbe">linux</a> <a href="/tags/windows/" style="font-size: 15px; color: #bbe">windows</a>
-</div>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>系统上输入法会设置一些热键，例如：</p>
+<ul>
+<li>输入法切换；</li>
+<li>全半角切换；</li>
+<li>中英文标点符号切换；</li>
+</ul>
+<p>但修改这些快捷键时可能出现无法修改的情况（貌似win7才存在）。比如虽然设置成功但是重启系统又自动恢复成原来的快捷键。遇到这种情况可以通过修改注册表解决。</p>
+<h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h3><p>打开注册表，定位到</p>
+<pre><code>HKEY_CURRENT_USER\Control Panel\Input Method\Hot Keys</code></pre><p><img src="/images/win7hotkeys.png" srcset="undefined" alt="win7hostkeys"></p>
+<p>其中00000010为输入法开关；00000011为全角半角切换；00000012为中英文标点切换。</p>
+<h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h3><p>修改Key Modifiers项：</p>
+<ul>
+<li>第一位：01表示Alt，02表示Ctrl，04表示Shift</li>
+<li>第二位：80表示左侧，40表示右侧，组合起来为c0表示左侧的按键都可以生效</li>
+</ul>
+<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h3><p>注销或重启系统生效。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/windows">windows</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/system">system</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/operations">operations</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/windows">windows</a>
+                
+                  <a class="hover-with-bg" href="/tags/hotkeys">hotkeys</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -218,6 +322,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
@@ -258,7 +367,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签&nbsp;",
+        "Win7上修改输入法的部分快捷键&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 90,

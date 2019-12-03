@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>Win7上修改输入法的部分快捷键</title>
+    <link href="undefinedwindows-system-operations-win7-change-inputmethod-hotkeys/"/>
+    <url>windows-system-operations-win7-change-inputmethod-hotkeys/</url>
+    
+    <content type="html"><![CDATA[<p>系统上输入法会设置一些热键，例如：</p><ul><li>输入法切换；</li><li>全半角切换；</li><li>中英文标点符号切换；</li></ul><p>但修改这些快捷键时可能出现无法修改的情况（貌似win7才存在）。比如虽然设置成功但是重启系统又自动恢复成原来的快捷键。遇到这种情况可以通过修改注册表解决。</p><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h3><p>打开注册表，定位到</p><pre><code>HKEY_CURRENT_USER\Control Panel\Input Method\Hot Keys</code></pre><p><img src="/images/win7hotkeys.png" srcset="undefined" alt="win7hostkeys"></p><p>其中00000010为输入法开关；00000011为全角半角切换；00000012为中英文标点切换。</p><h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h3><p>修改Key Modifiers项：</p><ul><li>第一位：01表示Alt，02表示Ctrl，04表示Shift</li><li>第二位：80表示左侧，40表示右侧，组合起来为c0表示左侧的按键都可以生效</li></ul><h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h3><p>注销或重启系统生效。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>windows</category>
+      
+      <category>system</category>
+      
+      <category>operations</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>windows</tag>
+      
+      <tag>hotkeys</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>KVM使用hugepage大页内存</title>
     <link href="undefinedlinux-kvm-how-to-set-hugepages-in-kvm/"/>
     <url>linux-kvm-how-to-set-hugepages-in-kvm/</url>

@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>axios发送options并返回以后未继续完成后续请求</title>
+    <link href="undefinedweb-axios-axios-authorization-not-matched-in-options/"/>
+    <url>web-axios-axios-authorization-not-matched-in-options/</url>
+    
+    <content type="html"><![CDATA[<h1 id="axios发送options并返回以后未继续完成后续请求"><a href="#axios发送options并返回以后未继续完成后续请求" class="headerlink" title="axios发送options并返回以后未继续完成后续请求"></a>axios发送options并返回以后未继续完成后续请求</h1><h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>axios在进行跨域请求时，会自动先进行一次OPTIONS请求，OPTIONS获取到对应方法并通过以后，就会自动继续完成原来的请求，但是我这里完成OPTIONS以后就停止了。</p><p>检查Response的headers发现，返回的Access-Control-Allow-Headers中有Authorization，但是请求依然无法成功执行。</p><p>再检查Request的headers却发现，请求的头里面，希望匹配的却是authorization，开头字母为小写。</p><p>其实是后端用了*号来匹配头部，但是实际上它只能匹配标准的头部名称，例如Content-Type,Content-Length,Authorization,  Accept等。</p><p><img src="/images/axios-options-problem-1.png" srcset="undefined" alt="axios-options-problem"></p><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>修改后台服务器设置Access-Control-Allow-Headers为：，强制包含一个authorization头即可。</p><pre><code>set_header(&#39;Access-Control-Allow-Headers&#39;, &#39;authorization,Authorization,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;)</code></pre><p>修改位置有两种：</p><ol><li>提供虚拟主机服务的配置，例如nginx</li><li>提供业务服务的后台代码，如tornado，代码如上所示。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+      <category>axios</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>axios</tag>
+      
+      <tag>web</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Win7上修改输入法的部分快捷键</title>
     <link href="undefinedwindows-system-operations-win7-change-inputmethod-hotkeys/"/>
     <url>windows-system-operations-win7-change-inputmethod-hotkeys/</url>

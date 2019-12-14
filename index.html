@@ -141,19 +141,19 @@
     
     <div class="col-12 col-md-8 m-auto">
       <a href="/web-axios-axios-authorization-not-matched-in-options/">
-        <p class="h4 index-header">axios发送options并返回以后未继续完成后续请求</p>
+        <p class="h4 index-header">axios在OPTIONS请求时无authorization认证头</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">axios发送options并返回以后未继续完成后续请求原因分析axios在进行跨域请求时，会自动先进行一次OPTIONS请求，OPTIONS获取到对应方法并通过以后，就会自动继续完成原来的请求，但是我这里完成OPTIONS以后就停止了。
+          <div class="index-text mb-1">axios在OPTIONS请求时无authorization认证头原因分析axios在进行跨域请求时，会自动先进行一次OPTIONS请求，OPTIONS获取到对应方法并通过以后，就会自动继续完成原来的请求，但是我这里完成OPTIONS以后就停止了。
 检查Response的headers发现，返回的Access-Control-Allow-Headers中有Authorization，但是请求依然无法成功执行。
 再检查Request的headers却发现，请求的头里面，希望匹配的却是authorization，开头字母为小写。
 其实是后端用了*号来匹配头部，但是实际上它只能匹配标准的头部名称，例如Content-Type,Content-Length,Authorization,  Accept等。
 
 解决办法修改后台服务器设置Access-Control-Allow-Headers为：，强制包含一个authorization头即可。
-set_header(&#39;Access-Control-Allow-Headers&#39;, &#39;authorization,Authorizatio</div>
+set_header(&#39;Access-Control-Allow-Headers&#39;, &#39;authorization,Authori</div>
         </div>
       </a>
 

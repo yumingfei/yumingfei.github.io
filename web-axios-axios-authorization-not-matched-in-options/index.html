@@ -15,7 +15,7 @@
   <meta name="description" content="努力探索这世界的一点一滴">
   <meta name="author" content="Fergus Yu">
   <meta name="keywords" content="Share Explore Things">
-  <title>axios发送options并返回以后未继续完成后续请求 ~ 小飞象</title>
+  <title>axios在OPTIONS请求时无authorization认证头 ~ 小飞象</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -117,7 +117,7 @@
               
                 <p class="mt-3">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
-                  星期六, 十二月 14日 2019, 10:01 晚上
+                  星期六, 十二月 14日 2019, 10:10 晚上
                 </p>
               
 
@@ -126,7 +126,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    271 字
+                    263 字
                   </span>&nbsp;
                 
 
@@ -167,7 +167,7 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h1 id="axios发送options并返回以后未继续完成后续请求"><a href="#axios发送options并返回以后未继续完成后续请求" class="headerlink" title="axios发送options并返回以后未继续完成后续请求"></a>axios发送options并返回以后未继续完成后续请求</h1><h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>axios在进行跨域请求时，会自动先进行一次OPTIONS请求，OPTIONS获取到对应方法并通过以后，就会自动继续完成原来的请求，但是我这里完成OPTIONS以后就停止了。</p>
+            <h1 id="axios在OPTIONS请求时无authorization认证头"><a href="#axios在OPTIONS请求时无authorization认证头" class="headerlink" title="axios在OPTIONS请求时无authorization认证头"></a>axios在OPTIONS请求时无authorization认证头</h1><h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>axios在进行跨域请求时，会自动先进行一次OPTIONS请求，OPTIONS获取到对应方法并通过以后，就会自动继续完成原来的请求，但是我这里完成OPTIONS以后就停止了。</p>
 <p>检查Response的headers发现，返回的Access-Control-Allow-Headers中有Authorization，但是请求依然无法成功执行。</p>
 <p>再检查Request的headers却发现，请求的头里面，希望匹配的却是authorization，开头字母为小写。</p>
 <p>其实是后端用了*号来匹配头部，但是实际上它只能匹配标准的头部名称，例如Content-Type,Content-Length,Authorization,  Accept等。</p>
@@ -359,7 +359,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "axios发送options并返回以后未继续完成后续请求&nbsp;",
+        "axios在OPTIONS请求时无authorization认证头&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 90,

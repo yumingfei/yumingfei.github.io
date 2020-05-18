@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>我的ubuntu18桌面设置</title>
+    <link href="undefinedlinux-ubuntu-desktop-my-ubuntu-desktop-1/"/>
+    <url>linux-ubuntu-desktop-my-ubuntu-desktop-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="我使用的ubuntu18桌面设置"><a href="#我使用的ubuntu18桌面设置" class="headerlink" title="我使用的ubuntu18桌面设置"></a>我使用的ubuntu18桌面设置</h1><h2 id="一、安装包"><a href="#一、安装包" class="headerlink" title="一、安装包"></a>一、安装包</h2><h3 id="1-gnome-shell-extensions"><a href="#1-gnome-shell-extensions" class="headerlink" title="1.gnome-shell-extensions"></a>1.gnome-shell-extensions</h3><p>必须要的基础extension包，用于管理其它extensions，可以通过apt命令直接安装：</p><pre><code># apt install gnome-shell-extensions</code></pre><p>安装以后就可以在 <strong>tweak</strong> 中看到多了一个扩展项。</p><p><img src="/images/my-ubuntu-desktop-1.png" srcset="undefined" alt="tweak"></p><h3 id="2-Dash-to-dock"><a href="#2-Dash-to-dock" class="headerlink" title="2.Dash to dock"></a>2.Dash to dock</h3><p>可以通过ubuntu自带的 <strong>软件</strong> 工具，在 <strong>附加工具</strong> 中找到。</p><h3 id="3-Workspace-Indicator"><a href="#3-Workspace-Indicator" class="headerlink" title="3.Workspace Indicator"></a>3.Workspace Indicator</h3><p>同上</p><h3 id="4-搜狗输入法"><a href="#4-搜狗输入法" class="headerlink" title="4.搜狗输入法"></a>4.搜狗输入法</h3><p>ubuntu自带的输入法真的是急死人，还是装上搜狗敲得带劲。<br>可以去这里下载：<a href="https://pinyin.sogou.com/linux/?r=pinyin" target="_blank" rel="noopener">https://pinyin.sogou.com/linux/?r=pinyin</a></p><p> 1.先直接通过apt命令或者ubuntu软件安装</p><p> 2.在<strong>设置 -&gt; 区域与语言 -&gt; 管理已安装的语言</strong>中修改键盘输入法系统为fcitx</p><p><img src="/images/my-ubuntu-desktop-2.png" srcset="undefined" alt="设置fcitx"></p><p> 3.注销再进来就可以啦</p><h2 id="二、设置桌面"><a href="#二、设置桌面" class="headerlink" title="二、设置桌面"></a>二、设置桌面</h2><h3 id="1-打开User-Themes"><a href="#1-打开User-Themes" class="headerlink" title="1.打开User Themes"></a>1.打开User Themes</h3><p>这是用来管理主题的工具，打开以后就可以在<em>外观<em>、</em>字体</em> 等项目中找到一些额外的设置，对微调界面很有帮助。</p><h3 id="2-配置Dash-to-Dock"><a href="#2-配置Dash-to-Dock" class="headerlink" title="2. 配置Dash to Dock"></a>2. 配置Dash to Dock</h3><p>把左侧的应用程序栏设置成dock在底部显示，如果有窗口重叠则自动隐藏。<br>如图：<br><img src="/images/my-ubuntu-desktop-3.png" srcset="undefined" alt="设置dash-to-dock"></p><p>P.S. 桌面上就动了这些东西，其它工作设置随后再补</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+      <category>ubuntu</category>
+      
+      <category>desktop</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+      <tag>ubuntu桌面</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>axios在OPTIONS请求时无authorization认证头</title>
     <link href="undefinedweb-axios-axios-authorization-not-matched-in-options/"/>
     <url>web-axios-axios-authorization-not-matched-in-options/</url>

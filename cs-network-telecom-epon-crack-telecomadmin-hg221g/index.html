@@ -15,7 +15,7 @@
   <meta name="description" content="努力探索这世界的一点一滴">
   <meta name="author" content="Fergus Yu">
   <meta name="keywords" content="Share Explore Things">
-  <title>归档 ~ 小飞象</title>
+  <title>破解电信光猫HG221G管理员账户信息 ~ 小飞象</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -102,7 +102,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/banner.png')no-repeat center center;
+         style="background: url('/img/banner.jpg')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -112,6 +112,41 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 五月 25日 2020, 9:38 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    535 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      2 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -123,41 +158,92 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 6 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2019</p>
-    
-    <a href="/web-axios-axios-authorization-not-matched-in-options/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">axios在OPTIONS请求时无authorization认证头</span>
-      <span style="float: right;">12-14</span>
-    </a>
-  
-    
-    <a href="/windows-system-operations-win7-change-inputmethod-hotkeys/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Win7上修改输入法的部分快捷键</span>
-      <span style="float: right;">12-03</span>
-    </a>
-  
-</div>
 
-
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="电信HG221G破解"><a href="#电信HG221G破解" class="headerlink" title="电信HG221G破解"></a>电信HG221G破解</h1><p>设备信息：</p>
+<pre><code>设备类型：EPON上行e8-C家庭网关
+设备型号：HG221G</code></pre><h2 id="一、管理账户信息"><a href="#一、管理账户信息" class="headerlink" title="一、管理账户信息"></a>一、管理账户信息</h2><p>首先需要通过网线连接好设备，并且dhcp获取地址成功；这时候其实已经可以正常上网。</p>
+<h3 id="1-先用普通账户登录一下useradmin-xxx"><a href="#1-先用普通账户登录一下useradmin-xxx" class="headerlink" title="1.先用普通账户登录一下useradmin/xxx"></a>1.先用普通账户登录一下useradmin/xxx</h3><p>这里的密码可以在设备背面找到。</p>
+<h3 id="2-用浏览器打开以下链接"><a href="#2-用浏览器打开以下链接" class="headerlink" title="2.用浏览器打开以下链接"></a>2.用浏览器打开以下链接</h3><p><a href="http://192.168.1.1/backupsettings.conf" target="_blank" rel="noopener">http://192.168.1.1/backupsettings.conf</a><br>可以把文件下载下来，是个XML文件。</p>
+<p>网上还说有一种，但是我的设备无法使用：<br><a href="http://192.168.1.1/cgi-bin/baseinfoSet.cgi" target="_blank" rel="noopener">http://192.168.1.1/cgi-bin/baseinfoSet.cgi</a></p>
+<h3 id="3-查找关键词telecom或者password"><a href="#3-查找关键词telecom或者password" class="headerlink" title="3.查找关键词telecom或者password"></a>3.查找关键词telecom或者password</h3><p>可以在下载的xml文件里面找到加密或者明文的密码以及一些其它信息。<br>密码加密的话应该就是BASE64协议，用这个网站解析就可以：<br><a href="http://tool.chinaz.com/Tools/base64.aspx" target="_blank" rel="noopener">http://tool.chinaz.com/Tools/base64.aspx</a></p>
+<h2 id="二、设置ipv6地址"><a href="#二、设置ipv6地址" class="headerlink" title="二、设置ipv6地址"></a>二、设置ipv6地址</h2><p>主要原理就是猫上面电信设置了好几种连接：</p>
+<ul>
+<li>TR069：电信管理网，删掉以后他们就不能主动控制你啦（没事不建议删除）</li>
+<li>Internet：用于连接internet的，一般就是pppoe拨号</li>
+<li>Other：桥接了一个vlan，电信拿来做itv的连接，我这里专门绑定了一个端口</li>
+</ul>
+<h3 id="1-使用telecomadmin账户登录"><a href="#1-使用telecomadmin账户登录" class="headerlink" title="1.使用telecomadmin账户登录"></a>1.使用telecomadmin账户登录</h3><h3 id="2-配置使用ipv4-amp-ipv6模式"><a href="#2-配置使用ipv4-amp-ipv6模式" class="headerlink" title="2.配置使用ipv4&amp;ipv6模式"></a>2.配置使用ipv4&amp;ipv6模式</h3><p>在【网络】-【internet连接】-【宽带设置】中，选择类似2_INTERNET_R_VID_1153这个internet的连接。<br> 修改协议模式为ipv4&amp;ipv6，地址分配机制和绑定端口根情况自己配置。</p>
+<h3 id="3-查看ipv6信息"><a href="#3-查看ipv6信息" class="headerlink" title="3.查看ipv6信息"></a>3.查看ipv6信息</h3><p>在【状态】-【网络侧信息】-【ipv6连接信息】里面就可以看到获取的ipv6信息了。</p>
+<h2 id="三、配置itv端口上网"><a href="#三、配置itv端口上网" class="headerlink" title="三、配置itv端口上网"></a>三、配置itv端口上网</h2><p>其实就是前面介绍的几种连接里面，Other模式专门绑定了一个端口。</p>
+<h3 id="1-解绑itv端口"><a href="#1-解绑itv端口" class="headerlink" title="1.解绑itv端口"></a>1.解绑itv端口</h3><p>在【网络】-【宽带设置】里面选中3_Other_B_VID_1154这个，右下角删除。<br>（注意提前记录好相关信息，例如mtu、vlan号、模式等）  </p>
+<h3 id="2-调整itv端口数量"><a href="#2-调整itv端口数量" class="headerlink" title="2.调整itv端口数量"></a>2.调整itv端口数量</h3><p>做法也很简单，在绑定端口那里多勾选几个。</p>
+<hr>
+<p>P.S. 参考来源</p>
+<pre><code>1.https://www.cnblogs.com/seoshanghai/p/3513018.html</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/cs">cs</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/network">network</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%94%B5%E4%BF%A1%E5%85%89%E7%8C%AB">电信光猫</a>
+                
+                  <a class="hover-with-bg" href="/tags/ipv6">ipv6</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -237,6 +323,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
@@ -277,7 +368,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "破解电信光猫HG221G管理员账户信息&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 90,

@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>破解电信光猫HG221G管理员账户信息</title>
+    <link href="undefinedcs-network-telecom-epon-crack-telecomadmin-hg221g/"/>
+    <url>cs-network-telecom-epon-crack-telecomadmin-hg221g/</url>
+    
+    <content type="html"><![CDATA[<h1 id="电信HG221G破解"><a href="#电信HG221G破解" class="headerlink" title="电信HG221G破解"></a>电信HG221G破解</h1><p>设备信息：</p><pre><code>设备类型：EPON上行e8-C家庭网关设备型号：HG221G</code></pre><h2 id="一、管理账户信息"><a href="#一、管理账户信息" class="headerlink" title="一、管理账户信息"></a>一、管理账户信息</h2><p>首先需要通过网线连接好设备，并且dhcp获取地址成功；这时候其实已经可以正常上网。</p><h3 id="1-先用普通账户登录一下useradmin-xxx"><a href="#1-先用普通账户登录一下useradmin-xxx" class="headerlink" title="1.先用普通账户登录一下useradmin/xxx"></a>1.先用普通账户登录一下useradmin/xxx</h3><p>这里的密码可以在设备背面找到。</p><h3 id="2-用浏览器打开以下链接"><a href="#2-用浏览器打开以下链接" class="headerlink" title="2.用浏览器打开以下链接"></a>2.用浏览器打开以下链接</h3><p><a href="http://192.168.1.1/backupsettings.conf" target="_blank" rel="noopener">http://192.168.1.1/backupsettings.conf</a><br>可以把文件下载下来，是个XML文件。</p><p>网上还说有一种，但是我的设备无法使用：<br><a href="http://192.168.1.1/cgi-bin/baseinfoSet.cgi" target="_blank" rel="noopener">http://192.168.1.1/cgi-bin/baseinfoSet.cgi</a></p><h3 id="3-查找关键词telecom或者password"><a href="#3-查找关键词telecom或者password" class="headerlink" title="3.查找关键词telecom或者password"></a>3.查找关键词telecom或者password</h3><p>可以在下载的xml文件里面找到加密或者明文的密码以及一些其它信息。<br>密码加密的话应该就是BASE64协议，用这个网站解析就可以：<br><a href="http://tool.chinaz.com/Tools/base64.aspx" target="_blank" rel="noopener">http://tool.chinaz.com/Tools/base64.aspx</a></p><h2 id="二、设置ipv6地址"><a href="#二、设置ipv6地址" class="headerlink" title="二、设置ipv6地址"></a>二、设置ipv6地址</h2><p>主要原理就是猫上面电信设置了好几种连接：</p><ul><li>TR069：电信管理网，删掉以后他们就不能主动控制你啦（没事不建议删除）</li><li>Internet：用于连接internet的，一般就是pppoe拨号</li><li>Other：桥接了一个vlan，电信拿来做itv的连接，我这里专门绑定了一个端口</li></ul><h3 id="1-使用telecomadmin账户登录"><a href="#1-使用telecomadmin账户登录" class="headerlink" title="1.使用telecomadmin账户登录"></a>1.使用telecomadmin账户登录</h3><h3 id="2-配置使用ipv4-amp-ipv6模式"><a href="#2-配置使用ipv4-amp-ipv6模式" class="headerlink" title="2.配置使用ipv4&amp;ipv6模式"></a>2.配置使用ipv4&amp;ipv6模式</h3><p>在【网络】-【internet连接】-【宽带设置】中，选择类似2_INTERNET_R_VID_1153这个internet的连接。<br> 修改协议模式为ipv4&amp;ipv6，地址分配机制和绑定端口根情况自己配置。</p><h3 id="3-查看ipv6信息"><a href="#3-查看ipv6信息" class="headerlink" title="3.查看ipv6信息"></a>3.查看ipv6信息</h3><p>在【状态】-【网络侧信息】-【ipv6连接信息】里面就可以看到获取的ipv6信息了。</p><h2 id="三、配置itv端口上网"><a href="#三、配置itv端口上网" class="headerlink" title="三、配置itv端口上网"></a>三、配置itv端口上网</h2><p>其实就是前面介绍的几种连接里面，Other模式专门绑定了一个端口。</p><h3 id="1-解绑itv端口"><a href="#1-解绑itv端口" class="headerlink" title="1.解绑itv端口"></a>1.解绑itv端口</h3><p>在【网络】-【宽带设置】里面选中3_Other_B_VID_1154这个，右下角删除。<br>（注意提前记录好相关信息，例如mtu、vlan号、模式等）  </p><h3 id="2-调整itv端口数量"><a href="#2-调整itv端口数量" class="headerlink" title="2.调整itv端口数量"></a>2.调整itv端口数量</h3><p>做法也很简单，在绑定端口那里多勾选几个。</p><hr><p>P.S. 参考来源</p><pre><code>1.https://www.cnblogs.com/seoshanghai/p/3513018.html</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>cs</category>
+      
+      <category>network</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>电信光猫</tag>
+      
+      <tag>ipv6</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>我的ubuntu18桌面设置</title>
     <link href="undefinedlinux-ubuntu-desktop-my-ubuntu-desktop-1/"/>
     <url>linux-ubuntu-desktop-my-ubuntu-desktop-1/</url>

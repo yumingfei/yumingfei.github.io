@@ -140,6 +140,68 @@
     
     
     <div class="col-12 col-md-8 m-auto">
+      <a href="/linux-os-a-script-to-resize-root-partition-in-linux/">
+        <p class="h4 index-header">一个linux系统重新调整root分区大小的自动化脚本</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">一、进入其它系统挂载待调整的磁盘调整磁盘时，需要保证对应磁盘无任何读写操作。可以通过别的系统来重新调整这个磁盘而不影响数据。
+1.使用系统安装光盘引导进入live系统2.使用pxe引导进入网络文件系统3.把磁盘拆到另外一个linux机器上
+具体方法可以根据实际情况采用。
+二、做好重新调整分区前的准备工作1.挂载分区...
+# create mount point 
+{
+  mkdir -p /run/chroot
+  mkdir -p /run/chhome
+} &amp;&gt; /dev/null
+
+# mount exist partition
+{
+  mount /dev/sda1 /run/chroot/
+  mount /dev/sda6 /run/chhome/
+} &amp;&gt; /dev/null
+...2.备份数据并卸载分区...
+# backup /home
+
+cp -a /run/chhome/* /run/chroot/home/ &amp;&gt; /dev/null
+sleep 10
+
+echo -e &quot;Done!&quot;
+
+# umou</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-24&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/linux">linux</a>&nbsp;
+          
+            <a href="/categories/os">os</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/linux">linux</a>&nbsp;
+          
+            <a href="/tags/partition">partition</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
       <a href="/cs-network-telecom-epon-crack-telecomadmin-hg221g/">
         <p class="h4 index-header">破解电信光猫HG221G管理员账户信息</p>
         

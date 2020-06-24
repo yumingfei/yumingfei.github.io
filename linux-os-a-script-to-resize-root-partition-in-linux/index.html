@@ -117,7 +117,7 @@
               
                 <p class="mt-3">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
-                  星期三, 六月 24日 2020, 5:50 下午
+                  星期三, 六月 24日 2020, 5:52 下午
                 </p>
               
 
@@ -126,7 +126,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    1.2k 字
+                    1.3k 字
                   </span>&nbsp;
                 
 
@@ -223,24 +223,41 @@ parted -l /dev/sda
 <ul>
 <li>resizepart(parted)</li>
 <li>e2fsck</li>
-<li>resize2fs<pre><code>...
+<li>resize2fs</li>
+</ul>
+<pre><code>...
 # resize exist / partition
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Resizing exist root partition \e[0m&quot; 
+
+echo -e &quot;\e[93mBefore Resizing: \e[0m&quot;
+parted -l /dev/sda1
+
+parted -s /dev/sda resizepart 1 90% &gt;&gt; /run/resizing.log
+sleep 5
+
+echo -e &quot;&gt;&gt;&gt;&gt;&gt;&gt; Starting...&quot;
+
+echo -e &quot;\e[93mAfter Resizing: \e[0m&quot;
+parted -l /dev/sda1
+
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Execute Disk checking and correct error... \e[0m&quot;
+e2fsck -fp /dev/sda1 &amp;&gt; /dev/null
+sleep 3
+echo -e &quot;Done!&quot;
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Write back to system... \e[0m&quot;
+resize2fs -f /dev/sda1 &amp;&gt; /dev/null
+echo -e &quot;Done!&quot;
+...</code></pre><h2 id="3-重新创建SWAP分区并更新UUID"><a href="#3-重新创建SWAP分区并更新UUID" class="headerlink" title="3.重新创建SWAP分区并更新UUID"></a>3.重新创建SWAP分区并更新UUID</h2><p>除了创建SWAP分区，还要更新一下root分区中的/etc/fstab文件。<br>里面记录了各个分区的UUID信息，这里主要做了这么两个工作：</p>
+<ul>
+<li>删除home条目</li>
+<li>更新SWAP的UUID<pre><code>...
+# create SWAP
 </code></pre></li>
 </ul>
-<p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Resizing exist root partition \e[0m” </p>
-<p>echo -e “\e[93mBefore Resizing: \e[0m”<br>parted -l /dev/sda1</p>
-<p>parted -s /dev/sda resizepart 1 90% &gt;&gt; /run/resizing.log<br>sleep 5</p>
-<p>echo -e “&gt;&gt;&gt;&gt;&gt;&gt; Starting…”</p>
-<p>echo -e “\e[93mAfter Resizing: \e[0m”<br>parted -l /dev/sda1</p>
-<p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Execute Disk checking and correct error… \e[0m”<br>e2fsck -fp /dev/sda1 &amp;&gt; /dev/null<br>sleep 3<br>echo -e “Done!”</p>
-<p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Write back to system… \e[0m”<br>resize2fs -f /dev/sda1 &amp;&gt; /dev/null<br>echo -e “Done!”<br>…</p>
-<pre><code>
-## 3.重新创建SWAP分区并更新UUID
-除了创建SWAP分区，还要更新一下root分区中的/etc/fstab文件。  
-里面记录了各个分区的UUID信息，这里主要做了这么两个工作：
-  - 删除home条目
-  - 更新SWAP的UUID</code></pre><p>…</p>
-<h1 id="create-SWAP"><a href="#create-SWAP" class="headerlink" title="create SWAP"></a>create SWAP</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition… \e[0m”<br>parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null<br>mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null</p>
+<p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition… \e[0m”<br>parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null<br>mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null</p>
 <p>echo -e “Done!”</p>
 <h1 id="mount-root-partition"><a href="#mount-root-partition" class="headerlink" title="mount root partition"></a>mount root partition</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Configurating SWAP Partition… \e[0m”<br>mount /dev/sda1 /run/chroot &amp;&gt; /dev/null</p>
 <p>cat /run/chroot/etc/fstab<br>blkid</p>
@@ -271,7 +288,7 @@ parted -l /dev/sda
 <p>echo -e “\e[93mAfter Resizing: \e[0m”<br>parted -l /dev/sda1</p>
 <p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Execute Disk checking and correct error… \e[0m”<br>e2fsck -fp /dev/sda1 &amp;&gt; /dev/null<br>sleep 3<br>echo -e “Done!”</p>
 <p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Write back to system… \e[0m”<br>resize2fs -f /dev/sda1 &amp;&gt; /dev/null<br>echo -e “Done!”</p>
-<h1 id="create-SWAP-1"><a href="#create-SWAP-1" class="headerlink" title="create SWAP"></a>create SWAP</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition… \e[0m”<br>parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null<br>mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null</p>
+<h1 id="create-SWAP"><a href="#create-SWAP" class="headerlink" title="create SWAP"></a>create SWAP</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition… \e[0m”<br>parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null<br>mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null</p>
 <p>echo -e “Done!”</p>
 <h1 id="mount-root-partition-1"><a href="#mount-root-partition-1" class="headerlink" title="mount root partition"></a>mount root partition</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Configurating SWAP Partition… \e[0m”<br>mount /dev/sda1 /run/chroot &amp;&gt; /dev/null</p>
 <p>cat /run/chroot/etc/fstab<br>blkid</p>

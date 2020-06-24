@@ -117,7 +117,7 @@
               
                 <p class="mt-3">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
-                  星期三, 六月 24日 2020, 5:52 下午
+                  星期三, 六月 24日 2020, 5:53 下午
                 </p>
               
 
@@ -134,7 +134,7 @@
                   
                   &nbsp;<i class="far fa-clock"></i>
                   <span class="post-count">
-                      6 分钟
+                      7 分钟
                   </span>&nbsp;
                 
 
@@ -253,54 +253,160 @@ echo -e &quot;Done!&quot;
 ...</code></pre><h2 id="3-重新创建SWAP分区并更新UUID"><a href="#3-重新创建SWAP分区并更新UUID" class="headerlink" title="3.重新创建SWAP分区并更新UUID"></a>3.重新创建SWAP分区并更新UUID</h2><p>除了创建SWAP分区，还要更新一下root分区中的/etc/fstab文件。<br>里面记录了各个分区的UUID信息，这里主要做了这么两个工作：</p>
 <ul>
 <li>删除home条目</li>
-<li>更新SWAP的UUID<pre><code>...
-# create SWAP
-</code></pre></li>
+<li>更新SWAP的UUID</li>
 </ul>
-<p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition… \e[0m”<br>parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null<br>mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null</p>
-<p>echo -e “Done!”</p>
-<h1 id="mount-root-partition"><a href="#mount-root-partition" class="headerlink" title="mount root partition"></a>mount root partition</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Configurating SWAP Partition… \e[0m”<br>mount /dev/sda1 /run/chroot &amp;&gt; /dev/null</p>
-<p>cat /run/chroot/etc/fstab<br>blkid</p>
-<h1 id="get-etc-fstab-SWAP-UUID"><a href="#get-etc-fstab-SWAP-UUID" class="headerlink" title="get /etc/fstab SWAP UUID"></a>get /etc/fstab SWAP UUID</h1><p>SWAP_UUID=<code>cat /run/chroot/etc/fstab | grep -v &#39;^#&#39; | awk &#39;/swap/{ print $1 }&#39; | cut -d &quot;=&quot; -f2</code><br>sleep 3<br>sed -i ‘/home/d’ /run/chroot/etc/fstab &amp;&gt; /dev/null </p>
-<p>umount -l /runt/chroot &amp;&gt; /dev/null</p>
-<p>echo -e “Done!”</p>
-<h1 id="change-SWAP-UUID"><a href="#change-SWAP-UUID" class="headerlink" title="change SWAP UUID"></a>change SWAP UUID</h1><p>tune2fs -U $SWAP_UUID /dev/sda2 &amp;&gt; /dev/null</p>
-<h1 id="confirm-UUID-Change"><a href="#confirm-UUID-Change" class="headerlink" title="confirm UUID Change"></a>confirm UUID Change</h1><p>mount /dev/sda1 /run/chroot &amp;&gt; /dev/null</p>
-<p>cat /run/chroot/etc/fstab<br>blkid</p>
-<p>umount -l /runt/chroot &amp;&gt; /dev/null</p>
-<h1 id="Reboot-System"><a href="#Reboot-System" class="headerlink" title="Reboot System!"></a>Reboot System!</h1><p>…</p>
-<pre><code>
----
+<pre><code>...
+# create SWAP
 
-完整脚本参考：</code></pre><p>#!/bin/bash</p>
-<p>clear</p>
-<p>echo -e “ \e[92m&gt;&gt;&gt;&gt;&gt; Start to Backup the exist /home… \e[0m”</p>
-<h1 id="create-mount-point"><a href="#create-mount-point" class="headerlink" title="create mount point"></a>create mount point</h1><p>{<br>  mkdir -p /run/chroot<br>  mkdir -p /run/chhome<br>} &amp;&gt; /dev/null</p>
-<h1 id="mount-exist-partition"><a href="#mount-exist-partition" class="headerlink" title="mount exist partition"></a>mount exist partition</h1><p>{<br>  mount /dev/sda1 /run/chroot/<br>  mount /dev/sda6 /run/chhome/<br>} &amp;&gt; /dev/null</p>
-<h1 id="backup-home"><a href="#backup-home" class="headerlink" title="backup /home"></a>backup /home</h1><p>cp -a /run/chhome/* /run/chroot/home/ &amp;&gt; /dev/null<br>sleep 10</p>
-<p>echo -e “Done!”</p>
-<h1 id="umount-all-partition"><a href="#umount-all-partition" class="headerlink" title="umount all partition"></a>umount all partition</h1><p>{<br>  umount -l /run/chroot<br>  umount -l /run/chhome<br>} &amp;&gt; /dev/null</p>
-<h1 id="delete-extended-partitions"><a href="#delete-extended-partitions" class="headerlink" title="delete extended partitions"></a>delete extended partitions</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; delete extended partitions… \e[0m”<br>echo -e “\e[93mOriginal partition status: \e[0m”<br>parted -l /dev/sda<br>echo -e “&gt;&gt;&gt;&gt;&gt;&gt; Starting…”<br>{<br>  parted -s /dev/sda rm 6<br>  sleep 1<br>  parted -s /dev/sda rm 5<br>  sleep 1<br>  parted -s /dev/sda rm 2<br>} &gt;&gt; /run/resizing.log<br>echo -e “\e[93mAfter operation partition status: \e[0m”<br>parted -l /dev/sda</p>
-<h1 id="resize-exist-partition"><a href="#resize-exist-partition" class="headerlink" title="resize exist / partition"></a>resize exist / partition</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Resizing exist root partition \e[0m” </p>
-<p>echo -e “\e[93mBefore Resizing: \e[0m”<br>parted -l /dev/sda1</p>
-<p>parted -s /dev/sda resizepart 1 90% &gt;&gt; /run/resizing.log<br>sleep 5</p>
-<p>echo -e “&gt;&gt;&gt;&gt;&gt;&gt; Starting…”</p>
-<p>echo -e “\e[93mAfter Resizing: \e[0m”<br>parted -l /dev/sda1</p>
-<p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Execute Disk checking and correct error… \e[0m”<br>e2fsck -fp /dev/sda1 &amp;&gt; /dev/null<br>sleep 3<br>echo -e “Done!”</p>
-<p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Write back to system… \e[0m”<br>resize2fs -f /dev/sda1 &amp;&gt; /dev/null<br>echo -e “Done!”</p>
-<h1 id="create-SWAP"><a href="#create-SWAP" class="headerlink" title="create SWAP"></a>create SWAP</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition… \e[0m”<br>parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null<br>mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null</p>
-<p>echo -e “Done!”</p>
-<h1 id="mount-root-partition-1"><a href="#mount-root-partition-1" class="headerlink" title="mount root partition"></a>mount root partition</h1><p>echo -e “\e[92m&gt;&gt;&gt;&gt;&gt; Configurating SWAP Partition… \e[0m”<br>mount /dev/sda1 /run/chroot &amp;&gt; /dev/null</p>
-<p>cat /run/chroot/etc/fstab<br>blkid</p>
-<h1 id="get-etc-fstab-SWAP-UUID-1"><a href="#get-etc-fstab-SWAP-UUID-1" class="headerlink" title="get /etc/fstab SWAP UUID"></a>get /etc/fstab SWAP UUID</h1><p>SWAP_UUID=<code>cat /run/chroot/etc/fstab | grep -v &#39;^#&#39; | awk &#39;/swap/{ print $1 }&#39; | cut -d &quot;=&quot; -f2</code><br>sleep 3<br>sed -i ‘/home/d’ /run/chroot/etc/fstab &amp;&gt; /dev/null </p>
-<p>umount -l /runt/chroot &amp;&gt; /dev/null</p>
-<p>echo -e “Done!”</p>
-<h1 id="change-SWAP-UUID-1"><a href="#change-SWAP-UUID-1" class="headerlink" title="change SWAP UUID"></a>change SWAP UUID</h1><p>tune2fs -U $SWAP_UUID /dev/sda2 &amp;&gt; /dev/null</p>
-<h1 id="confirm-UUID-Change-1"><a href="#confirm-UUID-Change-1" class="headerlink" title="confirm UUID Change"></a>confirm UUID Change</h1><p>mount /dev/sda1 /run/chroot &amp;&gt; /dev/null</p>
-<p>cat /run/chroot/etc/fstab<br>blkid</p>
-<p>umount -l /runt/chroot &amp;&gt; /dev/null</p>
-<h1 id="Reboot-System-1"><a href="#Reboot-System-1" class="headerlink" title="Reboot System!"></a>Reboot System!</h1><p>parted -l /dev/sda<br>echo -e “Finish!”<br>echo -e “\e[93mPlease confirm the partition correct then manual reboot! \e[0m”</p>
-<pre><code></code></pre>
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition... \e[0m&quot;
+parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null
+mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null
+
+echo -e &quot;Done!&quot;
+
+# mount root partition
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Configurating SWAP Partition... \e[0m&quot;
+mount /dev/sda1 /run/chroot &amp;&gt; /dev/null
+
+cat /run/chroot/etc/fstab
+blkid
+
+# get /etc/fstab SWAP UUID
+SWAP_UUID=`cat /run/chroot/etc/fstab | grep -v &#39;^#&#39; | awk &#39;/swap/{ print $1 }&#39; | cut -d &quot;=&quot; -f2`
+sleep 3
+sed -i &#39;/home/d&#39; /run/chroot/etc/fstab &amp;&gt; /dev/null 
+
+umount -l /runt/chroot &amp;&gt; /dev/null
+
+echo -e &quot;Done!&quot;
+
+# change SWAP UUID
+tune2fs -U $SWAP_UUID /dev/sda2 &amp;&gt; /dev/null
+
+# confirm UUID Change
+
+mount /dev/sda1 /run/chroot &amp;&gt; /dev/null
+
+cat /run/chroot/etc/fstab
+blkid
+
+umount -l /runt/chroot &amp;&gt; /dev/null
+# Reboot System!
+...</code></pre><hr>
+<p>完整脚本参考：</p>
+<pre><code>#!/bin/bash
+
+clear
+
+echo -e &quot; \e[92m&gt;&gt;&gt;&gt;&gt; Start to Backup the exist /home... \e[0m&quot;
+
+# create mount point 
+{
+  mkdir -p /run/chroot
+  mkdir -p /run/chhome
+} &amp;&gt; /dev/null
+
+# mount exist partition
+{
+  mount /dev/sda1 /run/chroot/
+  mount /dev/sda6 /run/chhome/
+} &amp;&gt; /dev/null
+
+# backup /home
+
+cp -a /run/chhome/* /run/chroot/home/ &amp;&gt; /dev/null
+sleep 10
+
+echo -e &quot;Done!&quot;
+
+# umount all partition
+{
+  umount -l /run/chroot
+  umount -l /run/chhome
+} &amp;&gt; /dev/null
+
+# delete extended partitions
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; delete extended partitions... \e[0m&quot;
+echo -e &quot;\e[93mOriginal partition status: \e[0m&quot;
+parted -l /dev/sda
+echo -e &quot;&gt;&gt;&gt;&gt;&gt;&gt; Starting...&quot;
+{
+  parted -s /dev/sda rm 6
+  sleep 1
+  parted -s /dev/sda rm 5
+  sleep 1
+  parted -s /dev/sda rm 2
+} &gt;&gt; /run/resizing.log
+echo -e &quot;\e[93mAfter operation partition status: \e[0m&quot;
+parted -l /dev/sda
+
+# resize exist / partition
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Resizing exist root partition \e[0m&quot; 
+
+echo -e &quot;\e[93mBefore Resizing: \e[0m&quot;
+parted -l /dev/sda1
+
+parted -s /dev/sda resizepart 1 90% &gt;&gt; /run/resizing.log
+sleep 5
+
+echo -e &quot;&gt;&gt;&gt;&gt;&gt;&gt; Starting...&quot;
+
+echo -e &quot;\e[93mAfter Resizing: \e[0m&quot;
+parted -l /dev/sda1
+
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Execute Disk checking and correct error... \e[0m&quot;
+e2fsck -fp /dev/sda1 &amp;&gt; /dev/null
+sleep 3
+echo -e &quot;Done!&quot;
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Write back to system... \e[0m&quot;
+resize2fs -f /dev/sda1 &amp;&gt; /dev/null
+echo -e &quot;Done!&quot;
+
+
+# create SWAP
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Create new SWAP partition... \e[0m&quot;
+parted -s /dev/sda mkpartfs primary linux-swap 90% 98% &amp;&gt; /dev/null
+mkfs.ext4 /dev/sda2 &amp;&gt; /dev/null
+
+echo -e &quot;Done!&quot;
+
+# mount root partition
+
+echo -e &quot;\e[92m&gt;&gt;&gt;&gt;&gt; Configurating SWAP Partition... \e[0m&quot;
+mount /dev/sda1 /run/chroot &amp;&gt; /dev/null
+
+cat /run/chroot/etc/fstab
+blkid
+
+# get /etc/fstab SWAP UUID
+SWAP_UUID=`cat /run/chroot/etc/fstab | grep -v &#39;^#&#39; | awk &#39;/swap/{ print $1 }&#39; | cut -d &quot;=&quot; -f2`
+sleep 3
+sed -i &#39;/home/d&#39; /run/chroot/etc/fstab &amp;&gt; /dev/null 
+
+umount -l /runt/chroot &amp;&gt; /dev/null
+
+echo -e &quot;Done!&quot;
+
+# change SWAP UUID
+tune2fs -U $SWAP_UUID /dev/sda2 &amp;&gt; /dev/null
+
+# confirm UUID Change
+
+mount /dev/sda1 /run/chroot &amp;&gt; /dev/null
+
+cat /run/chroot/etc/fstab
+blkid
+
+umount -l /runt/chroot &amp;&gt; /dev/null
+# Reboot System!
+parted -l /dev/sda
+echo -e &quot;Finish!&quot;
+echo -e &quot;\e[93mPlease confirm the partition correct then manual reboot! \e[0m&quot;</code></pre>
             <hr>
           </div>
           <br>
